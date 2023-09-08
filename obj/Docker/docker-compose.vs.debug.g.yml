@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  eps_vest_tc:
+    image: epsvesttc:dev
+    container_name: EPS_Vest_TC
+    build:
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "EPS_Vest_TC"
+    environment:
+      - NUGET_FALLBACK_PACKAGES=
+    volumes:
+      - /Users/robert/Projects/EPS_Vest_TC/EPS_Vest_TC:/app
+      - /Users/robert/Projects/EPS_Vest_TC:/src
+      - /Users/robert/vsdbg/vs2017u5:/remote_debugger:rw
+      - /Users/robert/.nuget/packages/:/root/.nuget/packages:ro
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages  \"/app/bin/Debug/net7.0/EPS_Vest_TC.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true

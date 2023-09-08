@@ -1,0 +1,12 @@
+name: dockercompose14312940641271637483
+services:
+  eps_vest_tc:
+    build:
+      context: /Users/robert/Projects/EPS_Vest_TC
+      dockerfile: EPS_Vest_TC/Dockerfile
+    image: epsvesttc
+    networks:
+      default: null
+networks:
+  default:
+    name: dockercompose14312940641271637483_default
